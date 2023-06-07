@@ -32,7 +32,8 @@ public class TodoMapperTests {
     int count = todoMapper.insert(todoDTO);
 
     Assertions.assertEquals(count, 1);
-
+    
+    log.info("====================");
     log.info("====================");
     log.info(todoDTO.getTno());
     log.info("====================");
