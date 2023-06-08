@@ -14,6 +14,8 @@
  
 
     <div layout:fragment="content">
+        <h1>Todo List Page!!</h1><br>
+
         [[${pageRequestDTO}]]<br>
         [[${pageResponseDTO}]]
 
@@ -62,5 +64,18 @@
             </div>
           </div>
     </div>
+
+    <script layout:fragment="script" th:inline="javascript">
+
+        const {page,size} = [[${pageRequestDTO}]]
+
+        console.log(page,size)
+
+        const {total} = [[${pageResponseDTO}]]
+
+        console.log("total: " + total)
+
+    </script>
+
 </body>
 </html>
