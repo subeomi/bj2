@@ -33,6 +33,10 @@ dependencies {
 	implementation 'jstl:jstl:1.2'
 
     implementation "org.apache.tomcat.embed:tomcat-embed-jasper"
+
+	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.1.0'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
 }
 
 tasks.named('test') {
