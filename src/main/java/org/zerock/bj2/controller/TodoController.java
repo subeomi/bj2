@@ -33,45 +33,18 @@ public class TodoController {
            model.addAttribute("pageResponseDTO",pageResponseDTO);
 
        }
-   
-       @GetMapping("add")
-       public void add(){
-           log.info("add");
-       }
-   
-       @PostMapping("add")
-       public String addPost(){
-           log.info("Add Post..............");
-           return "redirect:/todo/list";
-       }
-       
+
        @GetMapping("read/{tno}")
-       public String read(@PathVariable("tno") Long tno) {
-   
-           log.info("read");
-   
-           return "/todo/read";
+       public String read(
+            @PathVariable("tno") long tno,
+            PageRequestDTO pageRequestDTO){
+
+        log.info("read..........");
+        log.info(tno);
+
+        return "todo/read";
        }
    
-       @GetMapping("modify/{tno}")
-       public String modify(@PathVariable("tno") Long tno) {
-   
-           log.info("read");
-   
-           return "/todo/modify";
-       }
-   
-       @PostMapping("remove")
-       public String removePost() {
-           log.info("Remove Post..............");
-           return "redirect:/todo/list";
-       }
-       
-       @PostMapping("modify/{tno}")
-       public String modifyPost(@PathVariable("tno") Long tno) {
-           
-           log.info("Modify Post..............");
-           return "redirect:/todo/read/" + tno;
-       }
+
 
 }

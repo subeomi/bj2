@@ -31,6 +31,8 @@ public class PageRequestDTO {
     public void setSize(int size){
         if(size > 100 || size < 0) {
             this.size = 10;
+        } else {
+            this.size = size;
         }
     }
 
@@ -44,7 +46,7 @@ public class PageRequestDTO {
 
     public int getCountEnd() {
         
-        int temp = (int) (Math.ceil(this.page/10.0)) * 100;
+        int temp = (int) (Math.ceil(this.page/10.0)) * (10 * size);
         
         return temp + 1;
     }
