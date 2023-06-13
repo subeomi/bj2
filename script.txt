@@ -9,17 +9,75 @@ create table tbl_todo (
 
 )
 ;
-create table tbl_reply (
+create table tbl_reply2 (
 
 	rno int auto_increment primary key,
 	tno int not null,
 	reply varchar(1000) not null,
 	replyer varchar(100) not null,
-	replyDate timestamp default now()
+	replyDate timestamp default now(),
+	gno int default 0
 )
 ;
+
+
+select * from tbl_reply;
+
+create table tbl_reply2 (select * from tbl_reply where rno=10);
+
+alter table tbl_reply2 add column (gno int default 0);
+
+select * from tbl_reply2;
+
+
+
+## 순수한 댓글 - tno 1번
+
+insert into tbl_reply2 (tno, reply, replyer)
+values (100, 'R1','r1');
+
+update tbl_reply2 set gno = (select last_insert_id()) where rno = 1
+;
+
+## 1번의 대댓글
+insert into tbl_reply2 (tno, reply, replyer,gno)
+values (100, 'R1','r1', 1);
+
+
+## SELECT--------------------------
+select * from tbl_reply2 where tno = 100 order by gno asc;
+
+select
+	if(rno = gno, 0, 1) as step, rno, tno,gno, reply, replyer, replydate
+from tbl_reply2
+where tno = 100 order by gno asc , rno asc
+limit 0, 20
+;
+## select end----------------------------
+
+
+## 댓글 gno = rno 업데이트
+update tbl_reply2 set gno =10 where rno = 12;
+
+## 대댓글 생성
+insert into tbl_reply2 (tno, reply, replyer, gno)
+values (100, 'R2-1','r1', 1);
+
 select count(*) from tbl_reply;
 
+## 100 글에 대해 순수한 댓글 - 5번
+
+insert into tbl_reply2 (tno, reply, replyer)
+values (100, '2번째 댓글','r1');
+
+update tbl_reply2 set gno = (select last_insert_id()) where rno = 5
+;
+
+insert into tbl_reply2 (tno, reply, replyer,gno)
+values (100, 'R6-2','r1', 5);
+
+
+## -------------------------------------------------------------------------------------
 insert into tbl_reply (tno,reply,replyer)
 (
 select 
@@ -95,4 +153,13 @@ where
 order by tno desc
 limit 10,20	
 ;
+
+
+
+
+
+
+
+
+
 
