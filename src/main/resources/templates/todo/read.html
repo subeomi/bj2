@@ -4,18 +4,19 @@
         // async -> promise
         // promise: then, catch -->
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/lteLayout2.html}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout/lteLayout2.html}">
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
+
 <body>
-    <div layout:fragment="content">
+  <div layout:fragment="content">
     <h1>Read</h1>
     [[${todo}]]
     <ul class="postsDiv">
@@ -23,33 +24,33 @@
     </ul>
 
     <form method="post" id="write">
-        <input type="text" name="wTitle">
-        <input type="text" name="wAuthor">
-        <input type="submit">
+      <input type="text" name="wTitle">
+      <input type="text" name="wAuthor">
+      <input type="submit">
     </form>
 
     <div class="modal replyModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Modal title</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <input type="text" name="gno" readonly>
-              <input type="text" name="reply" value="AAA">
-              <input type="text" name="replyer" value="user00">
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-info btnAdd">ADD</button>
-              <button type="button" class="btn btn-danger btnDelete">DELETE</button>
-              <button type="button" class="btn btn-primary btnModify">MODIFY</button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <input type="text" name="gno" readonly>
+            <input type="text" name="reply" value="AAA">
+            <input type="text" name="replyer" value="user00">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-info btnAdd">ADD</button>
+            <button type="button" class="btn btn-danger btnDelete">DELETE</button>
+            <button type="button" class="btn btn-primary btnModify">MODIFY</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
         </div>
+      </div>
     </div>
 
     <!-- 댓글 목록 출력 -->
@@ -61,109 +62,112 @@
 
     <!-- axios 준비물 -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  </div>
+
+  <script layout:fragment="script" th:inline="javascript">
+
+    const replyModal = new bootstrap.Modal(document.querySelector(".replyModal"))
+    const replyUL = document.querySelector(".replyUL")
+    const { tno } = [[${ todo }]]
+
+    // 모달 관리
+    const gnoInput = document.querySelector("input[name='gno']")
+    const replyInput = document.querySelector("input[name='reply']")
+    const replyerInput = document.querySelector("input[name='replyer']")
+
+
+    // 댓글 기능
+    // 댓글 목록
+    const getRemoteList = async (pageNum) => {
+      const { data } = await axios.get(`http://localhost:8080/replies/${tno}/list?page${page}`)
+      return data
+    }
+    // 댓글 추가
+    const postRemoteAdd = async (reply) => {
+      const { data } = await axios.post(`http://localhost:8080/replies/${tno}/new`, reply)
+      return data
+    }
+
     
-</div>
+    let page = 1
 
-    <script layout:fragment="script" th:inline="javascript">
+    // 비동기 테스트
+    // getRemoteList(page).then(result => {
+    //     console.log(result)
+    // })
 
-        const replyModal = new bootstrap.Modal(document.querySelector(".replyModal"))
-        const replyUL = document.querySelector(".replyUL")
-        const {tno} = [[${todo}]]
+    // 비동기 등록 테스트
+    const reply = { tno: tno, reply: "Test Reply", replyer: "r1" }
 
-        // 모달 관리
-        const gnoInput = document.querySelector("input[name='gno']")
-        const replyInput = document.querySelector("input[name='reply']")
-        const replyerInput = document.querySelector("input[name='replyer']")
+    const loadReply = async (page, goEnd = false) => {
 
-        // 댓글 목록
-        
-        const getRemoteList = async (pageNum) => {
-            const {data} = await axios.get(`http://localhost:8080/replies/${tno}/list?page${page}`)
-            return data
-        }
-        
-        const postRemoteAdd = async (reply) => {
-            const {data} = await axios.post(`http://localhost:8080/replies/${tno}/new`, reply)
-            return data
-        }
+      const data = await getRemoteList(page)
 
-        let page = 1
+      console.log("loadReply..........")
+      console.log(data)
 
-        // 비동기 테스트
-        // getRemoteList(page).then(result => {
-        //     console.log(result)
-        // })
+      const { list, total } = data
 
-        // 비동기 등록 테스트
-        const reply = {tno:tno, reply:"Test Reply", replyer:"r1"}
+      let str = ""
 
-        const loadReply = async(page, goEnd = false) => {
-            
-          const data = await getRemoteList(page)
+      for (let i = 0; i < list.length; i++) {
+        const { rno, reply, replyer, gno } = list[i]
+        str += `<li data-rno=${rno} data-gno=${gno}>${reply} <button>답글</button></li>`
+      } // end for
 
-          console.log("loadReply..........")
-          console.log(data)
+      replyUL.innerHTML = str
 
-          const {list, total} = data
+    }
 
-          let str = ""
+    loadReply(page, true)
 
-          for(let i = 0; i < list.length; i++){
-            const {rno, reply, replyer, gno} = list[i]
-            str += `<li data-rno=${rno} data-gno=${gno}>${reply} <button>답글</button></li>`
-          } // end for
+    // 댓글조회, 답글쓰기 이벤트
+    replyUL.addEventListener("click", (e) => {
+      e.stopPropagation()
+      e.preventDefault()
 
-          replyUL.innerHTML = str
+      const target = e.target
 
-        }
+      const tag = target.tagName
+      if (tag === 'LI') {
 
-        loadReply(page, true)
-        
-        // 댓글조회, 답글쓰기 이벤트
-        replyUL.addEventListener("click", (e) => {
-          e.stopPropagation()
-          e.preventDefault()
+      } else if (tag === 'BUTTON') {
 
-          const target = e.target
+        const liObj = target.closest("li")
+        const gno = liObj.getAttribute("data-gno")
 
-          const tag = target.tagName
-          if(tag === 'LI'){
+        gnoInput.value = gno;
 
-          } else if(tag === 'BUTTON'){
+        replyModal.show()
 
-            const liObj = target.closest("li")
-            const gno = liObj.getAttribute("data-gno")
+      }
 
-            gnoInput.value = gno;
+    }, false)
 
-            replyModal.show()
+    document.querySelector(".btnAdd").addEventListener("click", e => {
 
-          }
+      const reply = {
+        tno: tno,
+        gno: gnoInput.value,
+        reply: replyInput.value,
+        replyer: replyerInput.value
+      }
 
-        }, false)
+      console.log(reply)
 
-        document.querySelector(".btnAdd").addEventListener("click", e => {
-          
-          const reply = {
-            tno:tno, 
-            gno:gnoInput.value,
-            reply:replyInput.value,
-            replyer:replyerInput.value
-          }
+      postRemoteAdd(reply).then(result => {
+        alert("성공")
+        loadReply(page)
 
-          console.log(reply)
-          
-          postRemoteAdd(reply).then(result =>{
-            alert("성공")
-            loadReply(page)
-            
-          }).catch(e => {
-            console.log("실패")
-            console.log(e.response.data)
-          })
+      }).catch(e => {
+        console.log("실패")
+        console.log(e.response.data)
+      })
 
-        }, false)
+    }, false)
 
-    </script>
+  </script>
 </body>
+
 </html>
