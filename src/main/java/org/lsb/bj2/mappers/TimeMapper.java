@@ -1,4 +1,4 @@
-package org.zerock.bj2.mappers;
+package org.lsb.bj2.mappers;
 
 import org.apache.ibatis.annotations.Mapper;
 

@@ -1,4 +1,4 @@
-package org.zerock.bj2;
+package org.lsb.bj2;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;

@@ -1,10 +1,6 @@
-package org.zerock.bj2.controller;
+package org.lsb.bj2.controller;
 
-import java.time.LocalDate;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import org.springframework.http.MediaType;
 import org.springframework.validation.BindException;
@@ -15,10 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.zerock.bj2.dto.PageRequestDTO;
-import org.zerock.bj2.dto.PageResponseDTO;
-import org.zerock.bj2.dto.ReplyDTO;
-import org.zerock.bj2.service.ReplyService;
+import org.lsb.bj2.dto.PageRequestDTO;
+import org.lsb.bj2.dto.PageResponseDTO;
+import org.lsb.bj2.dto.ReplyDTO;
+import org.lsb.bj2.service.ReplyService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

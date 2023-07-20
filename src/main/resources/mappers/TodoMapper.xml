@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.zerock.bj2.mappers.TodoMapper">
+<mapper namespace="org.lsb.bj2.mappers.TodoMapper">
 
    <insert id="insert">
         insert into tbl_todo (title, content, writer, dueDate)
@@ -14,7 +14,7 @@
     </selectKey>    
    </insert>
 
-   <select id="list" resultType="org.zerock.bj2.dto.TodoDTO">
+   <select id="list" resultType="org.lsb.bj2.dto.TodoDTO">
     select * from tbl_todo 
     where tno > 0
     order by tno+1000 desc

@@ -1,4 +1,4 @@
-package org.zerock.bj2.mappers;
+package org.lsb.bj2.mappers;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
-import org.zerock.bj2.dto.PageRequestDTO;
-import org.zerock.bj2.dto.TodoDTO;
+import org.lsb.bj2.dto.PageRequestDTO;
+import org.lsb.bj2.dto.TodoDTO;
 
 import lombok.extern.log4j.Log4j2;
 

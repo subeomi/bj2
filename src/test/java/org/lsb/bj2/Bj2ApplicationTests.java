@@ -1,10 +1,10 @@
-package org.zerock.bj2;
+package org.lsb.bj2;
 
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.zerock.bj2.mappers.TimeMapper;
+import org.lsb.bj2.mappers.TimeMapper;
 
 import java.sql.Connection;
 

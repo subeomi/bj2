@@ -1,9 +1,9 @@
-package org.zerock.bj2.mappers;
+package org.lsb.bj2.mappers;
 
 import java.util.List;
 
-import org.zerock.bj2.dto.PageRequestDTO;
-import org.zerock.bj2.dto.TodoDTO;
+import org.lsb.bj2.dto.PageRequestDTO;
+import org.lsb.bj2.dto.TodoDTO;
 
 public interface TodoMapper {
     

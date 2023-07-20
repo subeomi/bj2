@@ -1,4 +1,4 @@
-package org.zerock.bj2.controller;
+package org.lsb.bj2.controller;
 
 import java.util.List;
 

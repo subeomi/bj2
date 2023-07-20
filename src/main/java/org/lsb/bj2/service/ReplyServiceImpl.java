@@ -1,14 +1,13 @@
-package org.zerock.bj2.service;
+package org.lsb.bj2.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import org.zerock.bj2.dto.PageRequestDTO;
-import org.zerock.bj2.dto.PageResponseDTO;
-import org.zerock.bj2.dto.ReplyDTO;
-import org.zerock.bj2.dto.TodoDTO;
-import org.zerock.bj2.mappers.ReplyMapper;
-import org.zerock.bj2.mappers.TodoMapper;
+import org.lsb.bj2.dto.PageRequestDTO;
+import org.lsb.bj2.dto.PageResponseDTO;
+import org.lsb.bj2.dto.ReplyDTO;
+import org.lsb.bj2.mappers.ReplyMapper;
+import org.lsb.bj2.mappers.TodoMapper;
 
 import groovy.util.logging.Log4j2;
 import lombok.RequiredArgsConstructor;

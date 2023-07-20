@@ -1,10 +1,10 @@
-package org.zerock.bj2.service;
+package org.lsb.bj2.service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.zerock.bj2.dto.PageRequestDTO;
-import org.zerock.bj2.dto.ReplyDTO;
+import org.lsb.bj2.dto.PageRequestDTO;
+import org.lsb.bj2.dto.ReplyDTO;
 
 import lombok.extern.log4j.Log4j2;
 
